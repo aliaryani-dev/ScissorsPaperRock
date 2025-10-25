@@ -11,7 +11,6 @@ pub fn get_sys_choice() u8 {
     var prng = std.Random.DefaultPrng.init(timestamp);
     const random = prng.random();
     const choice = random.intRangeLessThan(u8, 1, 4);
-    std.debug.print("sys choice: {d}\n", .{choice});
     return choice;
 }
 
@@ -41,7 +40,32 @@ fn eval_choice(choice:u8) []const u8 {
 }
 
 pub fn compare(sys:u8,user:u8) !void {
-    try stdout.print("{s} (Your choice) vs. {s}", .{eval_choice(user), eval_choice(sys)});
-    try stdout.flush();
+    try stdout.print("{s} (Your choice) vs. {s}\n", .{eval_choice(user), eval_choice(sys)});
+    if (sys == 1) {
+        if (user == 1){
+            try stdout.print("EQUAL!\n", .{});
+        } else if (user == 2) {
+            try stdout.print("YOU LOSE!\n", .{});
+        } else {
+            try stdout.print("YOU WIN\n", .{});
+        }
+    } else if (sys == 2) {
+        if (user == 2){
+            try stdout.print("EQUAL!\n", .{});
+        } else if (user == 3) {
+            try stdout.print("YOU LOSE!\n", .{});
+        } else {
+            try stdout.print("YOU WIN\n", .{});
+        }
+    } else {
+        if (user == 3){
+            try stdout.print("EQUAL!\n", .{});
+        } else if (user == 1) {
+            try stdout.print("YOU LOSE!\n", .{});
+        } else {
+            try stdout.print("YOU WIN\n", .{});
+        }
+    }
 
+    try stdout.flush();
 }
