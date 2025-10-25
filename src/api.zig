@@ -25,7 +25,23 @@ pub fn get_user_choice() !u8 {
         1,2,3 => {return choice;},
          else => {
             try stdout.print("PLESE ENTER A VALID OPTION!\n", .{});
+            try stdout.flush();
             return error.inputError;
         }
     }
+}
+
+fn eval_choice(choice:u8) []const u8 {
+    return switch (choice) {
+        1 => "Scissors",
+        2 => "Paper",
+        3 => "Rock",
+        else => "",
+    };
+}
+
+pub fn compare(sys:u8,user:u8) !void {
+    try stdout.print("{s} (Your choice) vs. {s}", .{eval_choice(user), eval_choice(sys)});
+    try stdout.flush();
+
 }

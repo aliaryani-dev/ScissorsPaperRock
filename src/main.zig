@@ -7,6 +7,6 @@ const api = @import("api.zig");
 pub fn main() !void {
     const sys_choice = api.get_sys_choice();
     const user_choice = try api.get_user_choice();
-    _ = .{sys_choice,user_choice};
+    try api.compare(sys_choice, user_choice);
 }
 
