@@ -16,4 +16,7 @@ pub fn get_sys_choice() u8 {
 }
 
 pub fn get_user_choice() u8 {
+    try stdout.print("Please choose:\n1.Scissors\n2.Paper\n3.Rock\n", .{});
+    try stdout.print("choice => ", .{});
+    try stdout.flush();
 }
