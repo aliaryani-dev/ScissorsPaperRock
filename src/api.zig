@@ -15,8 +15,17 @@ pub fn get_sys_choice() u8 {
     return choice;
 }
 
-pub fn get_user_choice() u8 {
+pub fn get_user_choice() !u8 {
     try stdout.print("Please choose:\n1.Scissors\n2.Paper\n3.Rock\n", .{});
     try stdout.print("choice => ", .{});
     try stdout.flush();
+    const input = try stdin.takeDelimiterExclusive('\n');
+    const choice = try std.fmt.parseInt(u8, input, 10);
+    switch (choice) {
+        1,2,3 => {return choice;},
+         else => {
+            try stdout.print("PLESE ENTER A VALID OPTION!\n", .{});
+            return error.inputError;
+        }
+    }
 }
